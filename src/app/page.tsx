@@ -21,13 +21,13 @@ const C = {
 // ─── ITINERARY ────────────────────────────────────────────────────────────
 const days = [
   { day: 1, date: 'May 9',  theme: 'Adventure Begins',       sub: 'Private transfers to Ubud · Luxury villa check-in · Balinese welcome dinner',         img: '/riceterraces.jpeg' },
-  { day: 2, date: 'May 10', theme: 'Experience the Culture', sub: 'Tirta Empul temple at dawn · ATV through rice fields · Jungle Club sunset',             img: '/atv.jpeg' },
+  { day: 2, date: 'May 10', theme: 'Experience the Culture', sub: 'Tirta Empul temple at dawn · ATV jungle ride (add-on) · Jungle Club sundowner',        img: '/atv.jpeg' },
   { day: 3, date: 'May 11', theme: 'Hike + Hot Springs',     sub: 'Mount Batur sunrise trek · Volcanic hot springs · Return to Ubud',                      img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=75' },
-  { day: 4, date: 'May 12', theme: 'School Immersion Day',   sub: 'Green School Bali visit · Field experience with students · Free afternoon in Ubud',     img: '/waterfall3.jpeg' },
+  { day: 4, date: 'May 12', theme: 'School Immersion Day',   sub: 'Green School Bali visit · Field experience with students · Free day to explore Ubud',   img: '/waterfall3.jpeg' },
   { day: 5, date: 'May 13', theme: 'Meet the Mantas',        sub: 'Fast boat to Nusa Penida · Manta ray snorkeling · Coastal cliffs · Check-in Canggu',    img: '/nusapenida.jpeg' },
-  { day: 6, date: 'May 14', theme: 'Surf + Beach Club',      sub: 'Surf lesson at dawn · Free time in Canggu · Luna Beach Club afternoon',                 img: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&q=75' },
+  { day: 6, date: 'May 14', theme: 'Surf + Beach Club',      sub: 'Surf lesson at dawn · Free time to explore Canggu/Seminyak · Luna Beach Club afternoon', img: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&q=75' },
   { day: 7, date: 'May 15', theme: 'Startup Immersion Day',  sub: 'Embedded with a local Bali startup · Founders session · Finns Beach Club evening',      img: '/finns2.jpeg' },
-  { day: 8, date: 'May 16', theme: 'The Closing Act',        sub: 'Free morning to wander · Closing night at Savaya',                                      img: '/sendoff.jpeg' },
+  { day: 8, date: 'May 16', theme: 'The Closing Act',        sub: 'Free morning to explore · Closing night at Savaya',                                      img: '/sendoff.jpeg' },
   { day: 9, date: 'May 17', theme: 'Until Next Time',        sub: 'Breakfast included · Airport transfers · Until next time',                              img: '/waterfall2.jpeg' },
 ]
 
@@ -45,6 +45,7 @@ const included = [
   'Local startup immersion session',
   'Savaya closing night entry',
   'On-ground coordination throughout',
+  'On-call concierge throughout the trip',
 ]
 
 const notIncluded = [
@@ -300,9 +301,9 @@ export default function Page() {
         >
           <div style={{
             position: 'absolute', inset: 0, zIndex: 0,
-            backgroundImage: 'url(/nusapenida.jpeg)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=1600&q=80)',
             backgroundSize: 'cover', backgroundPosition: 'center 30%',
-            filter: 'contrast(0.9) saturate(0.55) brightness(0.38) sepia(0.15)',
+            filter: 'brightness(0.52) contrast(0.95) saturate(0.7)',
           }} />
 
           {/* Nav — no logo */}
@@ -361,9 +362,7 @@ export default function Page() {
               marginBottom: '40px',
               fontWeight: 300,
             }}>
-              We are an immersion travel company that organizes curated trips to emerging markets,
-              bringing together adventure, cultural exploration, and real-world learning.
-              First stop: Bali.
+              We are an immersion travel company that organizes curated trips to emerging markets, bringing together adventure, culture, and global learning. First stop, Bali.
             </p>
 
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -371,7 +370,7 @@ export default function Page() {
                 onClick={() => setModalOpen(true)}
                 style={{
                   padding: '14px 28px', borderRadius: '6px',
-                  background: C.bronze, color: C.white,
+                  background: C.bronze, color: C.dark,
                   fontWeight: 500, fontSize: '14px', border: 'none', cursor: 'pointer',
                   letterSpacing: '0.04em', transition: 'background 0.2s',
                 }}
@@ -382,10 +381,11 @@ export default function Page() {
                 padding: '14px 20px',
                 border: '1px solid rgba(255,255,255,0.2)',
                 borderRadius: '6px',
-                color: 'rgba(243,237,227,0.7)',
+                color: C.dark,
                 fontSize: '14px',
                 textDecoration: 'none',
                 letterSpacing: '0.03em',
+                background: 'rgba(243,237,227,0.7)',
               }}>
                 View itinerary
               </a>
@@ -394,18 +394,6 @@ export default function Page() {
             <p style={{ fontSize: '12px', color: 'rgba(154,123,79,0.6)', marginTop: '20px', letterSpacing: '0.05em' }}>
               Early bird opens March 22
             </p>
-          </div>
-        </section>
-
-        {/* ── STATS STRIP ──────────────────────────────────────── */}
-        <section style={{ background: C.dark, padding: '0 clamp(24px, 6vw, 80px)' }}>
-          <div style={{
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-            padding: 'clamp(24px, 4vw, 44px) 0',
-            display: 'inline-block',
-          }}>
-            <div style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(32px, 5vw, 52px)', color: C.white, lineHeight: 1 }}>9</div>
-            <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', marginTop: '6px', letterSpacing: '0.06em' }}>Days in Bali</div>
           </div>
         </section>
 
@@ -420,9 +408,8 @@ export default function Page() {
           gap: '16px',
         }}>
           <div>
-            <p style={{ fontSize: '11px', letterSpacing: '0.2em', color: 'rgba(26,24,20,0.6)', marginBottom: '4px' }}>EARLY BIRD</p>
             <p style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(16px, 2.5vw, 20px)', color: C.dark }}>
-              Info session opens March 22, 2026
+              Info session opens March 22 · 3 PM
             </p>
           </div>
           <button
@@ -434,7 +421,7 @@ export default function Page() {
               letterSpacing: '0.04em', whiteSpace: 'nowrap',
             }}
           >
-            Sign up now →
+            Sign up now
           </button>
         </section>
 
@@ -484,6 +471,26 @@ export default function Page() {
               </Fade>
             ))}
           </div>
+        </section>
+
+        {/* ── ADD-ON ACTIVITIES ────────────────────────────────── */}
+        <section style={{ padding: 'clamp(64px, 10vw, 120px) clamp(24px, 6vw, 80px)', background: C.surface }}>
+          <Fade>
+            <p style={{ fontSize: '11px', letterSpacing: '0.2em', color: C.bronze, marginBottom: '12px' }}>OPTIONAL</p>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 400, marginBottom: '48px', lineHeight: 1.1 }}>
+              Add-on activities
+            </h2>
+          </Fade>
+          <Fade delay={100}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1px', background: C.border }}>
+              {['ATV jungle ride', 'Spa and wellness experiences', 'Private surf coaching', 'Additional beach club access', 'Cultural workshops', 'Private excursions'].map((item, i) => (
+                <div key={i} style={{ background: C.bg, padding: '28px 24px' }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: C.bronze, marginBottom: '16px' }} />
+                  <p style={{ fontSize: '15px', color: C.text, fontWeight: 400, lineHeight: 1.5 }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          </Fade>
         </section>
 
         {/* ── WHAT'S INCLUDED / NOT INCLUDED ───────────────────── */}
@@ -559,9 +566,47 @@ export default function Page() {
               fontWeight: 400,
               lineHeight: 1.45,
             }}>
-              &ldquo;Every trip includes a day embedded with a local startup.&rdquo;
+              Every trip is curated to bring you closer to the place, the people, and the experience.
             </p>
             <div style={{ width: '40px', height: '1px', background: C.bronze, marginTop: '32px' }} />
+          </Fade>
+        </section>
+
+        {/* ── PHOTO GALLERY ────────────────────────────────────── */}
+        <section style={{ padding: 'clamp(64px, 10vw, 120px) clamp(24px, 6vw, 80px) 0', background: C.bg }}>
+          <Fade>
+            <p style={{ fontSize: '11px', letterSpacing: '0.2em', color: C.bronze, marginBottom: '12px' }}>THE EXPERIENCE</p>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 400, marginBottom: 'clamp(40px, 6vw, 72px)', lineHeight: 1.1 }}>
+              A glimpse of the experience
+            </h2>
+          </Fade>
+          <Fade delay={100}>
+            <div style={{
+              columns: '3 220px',
+              gap: '8px',
+              paddingBottom: 'clamp(64px, 10vw, 120px)',
+            }}>
+              {[
+                { src: '/manta.jpeg', alt: 'Manta ray snorkeling' },
+                { src: '/finns2.jpeg', alt: 'Finns Beach Club' },
+                { src: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=75', alt: 'Tirta Empul temple' },
+                { src: '/riceterraces.jpeg', alt: 'Bali rice terraces' },
+                { src: '/atv.jpeg', alt: 'ATV jungle ride' },
+                { src: 'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=75', alt: 'Balinese food' },
+                { src: '/sendoff.jpeg', alt: 'Savaya beach club' },
+                { src: '/waterfall.jpeg', alt: 'Bali nature' },
+                { src: '/nusapenida.jpeg', alt: 'Nusa Penida cliffs' },
+                { src: '/finns.jpeg', alt: 'Beach club' },
+                { src: 'https://images.unsplash.com/photo-1566041510639-8d95a2490bfb?w=800&q=75', alt: 'Bali villa' },
+                { src: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&q=75', alt: 'Surf scene' },
+              ].map((img, i) => (
+                <div key={i} style={{ breakInside: 'avoid', marginBottom: '8px', borderRadius: '6px', overflow: 'hidden' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={img.src} alt={img.alt} loading="lazy"
+                    style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
+                </div>
+              ))}
+            </div>
           </Fade>
         </section>
 
@@ -575,7 +620,7 @@ export default function Page() {
           alignItems: 'end',
         }}>
           <Fade>
-            <p style={{ fontSize: '11px', letterSpacing: '0.2em', color: C.bronze, marginBottom: '16px' }}>EARLY BIRD OPENS MARCH 22</p>
+            <p style={{ fontSize: '11px', letterSpacing: '0.2em', color: C.bronze, marginBottom: '16px' }}>BALI · MAY 2026</p>
             <h2 style={{
               fontFamily: 'Georgia, serif',
               fontSize: 'clamp(36px, 6vw, 72px)',
