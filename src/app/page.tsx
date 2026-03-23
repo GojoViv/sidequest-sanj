@@ -711,7 +711,20 @@ export default function Page() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
+          gap: '24px',
         }}>
+          <a href="/terms" style={{
+            fontSize: '11px',
+            letterSpacing: '0.12em',
+            color: 'rgba(255,255,255,0.2)',
+            textDecoration: 'none',
+            transition: 'color 0.2s',
+          }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.2)')}
+          >
+            TERMS &amp; CONDITIONS
+          </a>
           <a href="#" aria-label="Instagram" style={{ color: 'rgba(255,255,255,0.2)', transition: 'color 0.2s' }}
             onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
             onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.2)')}
