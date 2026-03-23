@@ -87,6 +87,9 @@ function SignupForm({ dark = false, onDone }: { dark?: boolean; onDone?: () => v
   const [batch, setBatch] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [commitment, setCommitment] = useState('')
+  const [excited, setExcited] = useState('')
   const [state, setState] = useState<'idle' | 'loading' | 'done'>('idle')
 
   const inputStyle: React.CSSProperties = {
@@ -117,16 +120,25 @@ function SignupForm({ dark = false, onDone }: { dark?: boolean; onDone?: () => v
     transition: 'border-color 0.15s',
   }
 
+  const labelStyle: React.CSSProperties = {
+    fontSize: '11px',
+    letterSpacing: '0.15em',
+    color: dark ? 'rgba(154,123,79,0.9)' : C.bronze,
+    marginBottom: '8px',
+    fontWeight: 500,
+    display: 'block',
+  }
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!batch) return
+    if (!batch || !commitment) return
     setState('loading')
     await new Promise(r => setTimeout(r, 900))
     try {
       await fetch('/api/reserve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, batch_preference: batch, trip: 'Bali May 2026', source: 'info-session' }),
+        body: JSON.stringify({ name, email, phone, batch_preference: batch, commitment, excited, trip: 'Bali May 2026', source: 'info-session' }),
       })
     } catch { /* silent */ }
     setState('done')
@@ -148,33 +160,51 @@ function SignupForm({ dark = false, onDone }: { dark?: boolean; onDone?: () => v
   }
 
   return (
-    <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
-      {/* Batch selection */}
+    <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+
+      {/* Top note */}
+      <div style={{
+        padding: '10px 14px',
+        borderRadius: '6px',
+        background: dark ? 'rgba(154,123,79,0.15)' : 'rgba(154,123,79,0.08)',
+        border: `1px solid ${dark ? 'rgba(154,123,79,0.3)' : 'rgba(154,123,79,0.25)'}`,
+        fontSize: '12px',
+        color: dark ? 'rgba(184,149,106,0.9)' : C.bronze,
+        lineHeight: 1.5,
+      }}>
+        Limited early bird spots. Payment links will be shared after sign-up.
+      </div>
+
+      {/* 1. Basic Details */}
+      <input
+        type="text" required value={name} onChange={e => setName(e.target.value)}
+        placeholder="Full name" style={inputStyle}
+      />
+      <input
+        type="email" required value={email} onChange={e => setEmail(e.target.value)}
+        placeholder="Email address" style={inputStyle}
+      />
+      <input
+        type="tel" required value={phone} onChange={e => setPhone(e.target.value)}
+        placeholder="Phone number (WhatsApp preferred)" style={inputStyle}
+      />
+
+      {/* 2. Batch Selection */}
       <div>
-        <p style={{ fontSize: '11px', letterSpacing: '0.15em', color: dark ? 'rgba(154,123,79,0.9)' : C.bronze, marginBottom: '8px', fontWeight: 500 }}>
-          SELECT YOUR PREFERRED BATCH
-        </p>
+        <span style={labelStyle}>SELECT YOUR PREFERRED BATCH</span>
         <div className="batch-radios" style={{ display: 'flex', gap: '8px' }}>
           {['May 9 – 17', 'May 17 – 25'].map(opt => (
             <label
               key={opt}
               style={{
                 ...radioLabelStyle,
-                borderColor: batch === opt
-                  ? C.bronze
-                  : dark ? 'rgba(255,255,255,0.12)' : C.border,
-                color: batch === opt
-                  ? (dark ? C.white : C.text)
-                  : (dark ? 'rgba(243,237,227,0.6)' : C.muted),
+                borderColor: batch === opt ? C.bronze : dark ? 'rgba(255,255,255,0.12)' : C.border,
+                color: batch === opt ? (dark ? C.white : C.text) : (dark ? 'rgba(243,237,227,0.6)' : C.muted),
               }}
             >
               <input
-                type="radio"
-                name="batch"
-                value={opt}
-                required
-                checked={batch === opt}
-                onChange={() => setBatch(opt)}
+                type="radio" name="batch" value={opt} required
+                checked={batch === opt} onChange={() => setBatch(opt)}
                 style={{ accentColor: C.bronze, width: '14px', height: '14px', cursor: 'pointer' }}
               />
               {opt}
@@ -183,14 +213,46 @@ function SignupForm({ dark = false, onDone }: { dark?: boolean; onDone?: () => v
         </div>
       </div>
 
-      <input
-        type="text" required value={name} onChange={e => setName(e.target.value)}
-        placeholder="Your name" style={inputStyle}
-      />
-      <input
-        type="email" required value={email} onChange={e => setEmail(e.target.value)}
-        placeholder="Your email" style={inputStyle}
-      />
+      {/* 3. Commitment Signal */}
+      <div>
+        <span style={labelStyle}>ARE YOU PLANNING TO SECURE YOUR SPOT IF SELECTED?</span>
+        <div className="batch-radios" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {['Yes', 'Need more information'].map(opt => (
+            <label
+              key={opt}
+              style={{
+                ...radioLabelStyle,
+                borderColor: commitment === opt ? C.bronze : dark ? 'rgba(255,255,255,0.12)' : C.border,
+                color: commitment === opt ? (dark ? C.white : C.text) : (dark ? 'rgba(243,237,227,0.6)' : C.muted),
+                flex: 'none',
+              }}
+            >
+              <input
+                type="radio" name="commitment" value={opt} required
+                checked={commitment === opt} onChange={() => setCommitment(opt)}
+                style={{ accentColor: C.bronze, width: '14px', height: '14px', cursor: 'pointer' }}
+              />
+              {opt}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. Experience Intent */}
+      <div>
+        <span style={labelStyle}>WHAT ARE YOU MOST EXCITED TO EXPERIENCE IN BALI?</span>
+        <textarea
+          value={excited} onChange={e => setExcited(e.target.value)}
+          placeholder="Tell us what excites you most..."
+          rows={3}
+          style={{
+            ...inputStyle,
+            resize: 'none',
+            lineHeight: 1.6,
+          }}
+        />
+      </div>
+
       <button
         type="submit" disabled={state === 'loading'}
         style={{
